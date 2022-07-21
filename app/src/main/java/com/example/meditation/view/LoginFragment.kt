@@ -2,6 +2,8 @@ package com.example.meditation.view
 
 import android.os.Bundle
 import android.text.InputType
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -30,35 +32,38 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnShowPwd.setOnClickListener {
-            if(showPwd){
-                binding.passwordIn.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-                showPwd = false
-                Toast.makeText(context, "ilk ifin içindeyim",Toast.LENGTH_SHORT).show()
-            }else{
-                showPwd = true
-                binding.passwordIn.inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME
-                Toast.makeText(context, "ikinci ifin içindeyim",Toast.LENGTH_SHORT).show()
-
-            }
-        }
+        changePasswordTextForm()
 
         binding.btnContinue.setOnClickListener {
             val userName = binding.usernameIn.text.toString()
             val password = binding.passwordIn.text.toString()
             val passwordShouldBe = ("(?=.*[0-9])(?=.*[A-Z])").toRegex()
-            val patern2 = Pattern.compile("^([0-9]+)([A-Z]+)([a-z]*)$")
+            val patern = Pattern.compile("(.*[0-9].*)(.*[A-Z].*)(.*[a-z].*)")
+            val patern4 = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
             if(userName.length <= 2){
                 Toast.makeText(context,"Username should be long more than two characters!", Toast
                     .LENGTH_SHORT).show()
             }
-            else if(/*password.length > 6 &&*/ patern2.matcher(password).matches()){
+            else if(/*password.length > 6 &&*/ patern.matcher(password).matches()){
                 val action = LoginFragmentDirections.actionLoginToHome()
                 Navigation.findNavController(it).navigate(action)
             }
             else{
                Toast.makeText(context,"Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!", Toast
                     .LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun changePasswordTextForm() {
+        binding.btnShowPwd.setOnClickListener {
+            if(showPwd){
+                binding.passwordIn.transformationMethod = PasswordTransformationMethod.getInstance()
+                showPwd = false
+            }
+            else{
+                binding.passwordIn.transformationMethod =  HideReturnsTransformationMethod.getInstance()
+                showPwd = true
             }
         }
     }
