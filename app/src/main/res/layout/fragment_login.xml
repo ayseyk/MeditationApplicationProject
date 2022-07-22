@@ -105,7 +105,7 @@
             android:layout_marginBottom="15dp"
             android:background="#00FFFFFF"
             android:scaleType="fitCenter"
-            android:src="@drawable/img"
+            android:src="@drawable/eye_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/password_in" />
