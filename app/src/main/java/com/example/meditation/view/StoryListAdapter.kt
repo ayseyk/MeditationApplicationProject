@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meditation.R
-import com.example.meditation.model.Meditation
 import com.example.meditation.model.Story
 import kotlinx.android.synthetic.main.item_story.view.*
 

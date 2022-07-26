@@ -32,24 +32,29 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         changePasswordTextForm()
 
+        initializeEvents()
+
+    }
+
+    private fun initializeEvents() {
         binding.btnContinue.setOnClickListener {
             val userName = binding.usernameIn.text.toString()
             val password = binding.passwordIn.text.toString()
 
-            val patern = Pattern.compile("(.*[0-9].*)(.*[A-Z].*)(.*[a-z].*)")
-            val patern4 = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
+            val patern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
+            //^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$
 
             if(userName.length <= 2){
                 Toast.makeText(context,"Username should be long more than two characters!", Toast
                     .LENGTH_SHORT).show()
             }
-            else if(/*password.length > 6 &&*/ patern.matcher(password).matches()){
+            else if(patern.matcher(password).matches()){
                 prefs.storeUserName(userName)
                 val action = LoginFragmentDirections.actionLoginToHome()
                 Navigation.findNavController(it).navigate(action)
             }
             else{
-               Toast.makeText(context,"Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!", Toast
+                Toast.makeText(context,"Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!", Toast
                     .LENGTH_SHORT).show()
             }
         }
