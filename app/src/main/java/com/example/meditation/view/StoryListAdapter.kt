@@ -1,5 +1,6 @@
 package com.example.meditation.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,26 +15,26 @@ class StoryListAdapter(private val storyList : ArrayList<Story>) : RecyclerView
 
     class StoryViewHolder(var view : View) : RecyclerView.ViewHolder(view)
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateStoryList(newStoryList : List<Story>){
         storyList.clear()
         storyList.addAll(newStoryList)
-        notifyDataSetChanged() //refresh recyclerView
+        notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryListAdapter.StoryViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.item_story, parent, false)
-        return StoryListAdapter.StoryViewHolder(view)
+        return StoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: StoryListAdapter.StoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
         holder.view.tvStoryName.text = storyList[position].Name
         holder.view.tvStoryDesc.text = storyList[position].Description
-        holder.view.storyImg.setBackgroundResource(R.drawable.ic_launcher_background)
+        holder.view.storyImg.setBackgroundResource(storyList[position].Image)
     }
 
     override fun getItemCount(): Int {
         return storyList.size
     }
-
 }

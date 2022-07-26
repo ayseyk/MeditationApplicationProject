@@ -1,5 +1,6 @@
 package com.example.meditation.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,10 @@ class MeditationListAdapter(private val meditationList : ArrayList<Meditation>) 
 
     class MeditationViewHolder(var view : View) : RecyclerView.ViewHolder(view)
 
-    fun updateMeditationList(newmeditationList : List<Meditation>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateMeditationList(newMeditationList : List<Meditation>){
         meditationList.clear()
-        meditationList.addAll(newmeditationList)
+        meditationList.addAll(newMeditationList)
         notifyDataSetChanged() //refresh recyclerView
     }
 

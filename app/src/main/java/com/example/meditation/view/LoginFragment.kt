@@ -1,6 +1,7 @@
 package com.example.meditation.view
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.text.InputType
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -13,18 +14,21 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.meditation.R
 import com.example.meditation.databinding.FragmentLoginBinding
+import com.example.meditation.util.Util
 import java.util.regex.Pattern
 
 class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
     private var showPwd = false
+    private lateinit var prefs : Util
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(layoutInflater)
+        prefs = Util(requireContext())
         return binding.root
         //inflater.inflate(R.layout.fragment_login, container, false)
     }
@@ -45,6 +49,7 @@ class LoginFragment : Fragment() {
                     .LENGTH_SHORT).show()
             }
             else if(/*password.length > 6 &&*/ patern.matcher(password).matches()){
+                prefs.storeUserName(userName)
                 val action = LoginFragmentDirections.actionLoginToHome()
                 Navigation.findNavController(it).navigate(action)
             }
@@ -54,6 +59,8 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+
 
     private fun changePasswordTextForm() {
         binding.btnShowPwd.setOnClickListener {
