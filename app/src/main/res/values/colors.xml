@@ -10,4 +10,6 @@
     <color name="button_blue">#2C74F4</color>
     <color name="linear_layout_grey">#AFAFAF</color>
     <color name="banner">#4036A3</color>
+    <color name="date">#26FFFFFF</color>
+    <color name="status_bar">#1E1E1F</color>
 </resources>

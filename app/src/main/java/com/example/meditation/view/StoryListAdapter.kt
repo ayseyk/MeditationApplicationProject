@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.meditation.R
 import com.example.meditation.model.Meditation
@@ -32,6 +33,11 @@ class StoryListAdapter(private val storyList : ArrayList<Story>) : RecyclerView
         holder.view.tvStoryName.text = storyList[position].Name
         holder.view.tvStoryDesc.text = storyList[position].Description
         holder.view.storyImg.setBackgroundResource(storyList[position].Image)
+
+        holder.view.storyLayout.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeToMedia(storyList[position])
+            Navigation.findNavController(holder.view).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

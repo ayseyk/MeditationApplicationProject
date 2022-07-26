@@ -24,6 +24,14 @@ class HomeFragment : Fragment() {
     private val storyListAdapter= StoryListAdapter(arrayListOf())
     private lateinit var prefs : Util
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        prefs = Util(requireContext())
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
     private val meditationListObserver = Observer<List<Meditation>>{ list->
         list?.let{
             meditationListAdapter.updateMeditationList(it)
@@ -34,14 +42,6 @@ class HomeFragment : Fragment() {
         list?.let{
             storyListAdapter.updateStoryList(it)
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        prefs = Util(requireContext())
-        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     @SuppressLint("SetTextI18n")
