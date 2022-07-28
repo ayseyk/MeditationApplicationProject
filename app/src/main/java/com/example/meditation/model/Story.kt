@@ -4,9 +4,9 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class Story (
-    val Image : Int,
-    val Name : String?,
-    val Description : String?,
-    val LongDescription : String? = null
+data class Story (  //data!!
+    val image : Int, //küçük harf!!!
+    val name : String?,
+    val description : String?,
+    val longDescription : String? = null
 ) : Parcelable

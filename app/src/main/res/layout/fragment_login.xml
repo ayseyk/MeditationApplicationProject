@@ -13,102 +13,62 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="136dp"
-        android:text="Sign in to Meditopia"
+        android:text="@string/meditopia"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/username_constraint"
+    <EditText
+        android:id="@+id/username_in"
         android:layout_width="0dp"
-        android:layout_height="27dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="41dp"
         android:layout_marginEnd="24dp"
+        android:backgroundTint="#66AFAFAF"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textColor="#000000"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topic_media">
+        app:layout_constraintTop_toBottomOf="@id/topic_media" />
 
-        <EditText
-            android:id="@+id/username_in"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="4dp"
-            android:background="#00FFFFFF"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/linear_layout_grey"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_in">
-
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/password_constraint"
+    <EditText
+        android:id="@+id/password_in"
         android:layout_width="0dp"
-        android:layout_height="33dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/username_constraint"
-        app:layout_constraintStart_toStartOf="@+id/username_constraint"
-        app:layout_constraintTop_toBottomOf="@+id/username_constraint">
+        android:backgroundTint="#66AFAFAF"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/username_in"
+        app:layout_constraintStart_toStartOf="@id/username_in"
+        app:layout_constraintTop_toBottomOf="@id/username_in" />
+    <!--android:drawableRight="@drawable/eye_img"-->
 
-        <EditText
-            android:id="@+id/password_in"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:background="#00FFFFFF"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:password="false"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/linear_layout_grey"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_in"></LinearLayout>
-
-        <ImageButton
-            android:id="@+id/btnShowPwd"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="15dp"
-            android:background="#00FFFFFF"
-            android:scaleType="fitCenter"
-            android:src="@drawable/eye_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/password_in" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageButton
+        android:id="@+id/btnShowPwd"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00FFFFFF"
+        android:elevation="15dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/eye_img"
+        app:layout_constraintBottom_toBottomOf="@+id/password_in"
+        app:layout_constraintEnd_toEndOf="@+id/password_in"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/password_in"
+        app:layout_constraintTop_toTopOf="@+id/password_in" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnContinue"
@@ -123,5 +83,5 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_constraint" />
+        app:layout_constraintTop_toBottomOf="@+id/password_in" />
 </androidx.constraintlayout.widget.ConstraintLayout>

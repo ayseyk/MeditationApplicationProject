@@ -29,9 +29,9 @@ class StoryListAdapter(private val storyList : ArrayList<Story>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        holder.view.tvStoryName.text = storyList[position].Name
-        holder.view.tvStoryDesc.text = storyList[position].Description
-        holder.view.storyImg.setBackgroundResource(storyList[position].Image)
+        holder.view.tvStoryName.text = storyList[position].name
+        holder.view.tvStoryDesc.text = storyList[position].description
+        holder.view.storyImg.setBackgroundResource(storyList[position].image)
 
         holder.view.storyLayout.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeToMedia(storyList[position])

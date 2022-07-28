@@ -28,9 +28,9 @@ class MeditationListAdapter(private val meditationList : ArrayList<Meditation>) 
     }
 
     override fun onBindViewHolder(holder: MeditationViewHolder, position: Int) {
-        holder.view.tvMeditationName.text = meditationList[position].Name
-        holder.view.tvMeditationDesc.text = meditationList[position].Description
-        holder.view.meditationImg.setBackgroundResource(meditationList[position].Image)
+        holder.view.tvMeditationName.text = meditationList[position].name
+        holder.view.tvMeditationDesc.text = meditationList[position].description
+        holder.view.meditationImg.setBackgroundResource(meditationList[position].image)
     }
 
     override fun getItemCount(): Int {

@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import com.example.meditation.R
 import com.example.meditation.databinding.FragmentMediaBinding
 import com.example.meditation.model.Story
@@ -55,8 +55,7 @@ class MediaFragment : Fragment() {
 
     private fun initializeEvents(view : View) {
         btnBack.setOnClickListener {
-            val action = MediaFragmentDirections.actionMediaToHome()
-            Navigation.findNavController(view).navigate(action)
+            findNavController(view).popBackStack()
         }
 
         btnPlay.setOnClickListener {

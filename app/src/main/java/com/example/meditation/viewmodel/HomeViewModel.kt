@@ -12,15 +12,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     val meditations by lazy { MutableLiveData<List<Meditation>>() }
     val stories by lazy { MutableLiveData<List<Story>>() }
 
-    fun refreshMeditationList(){
+    fun refreshMeditationList() {
         getMeditations()
     }
 
-    fun refreshStoryList(){
+    fun refreshStoryList() {
         getStories()
     }
 
-    private fun getMeditations(){
+    private fun getMeditations() {
         val m1 = Meditation(R.drawable.m1,"Sleep Well","A dreamy sleep")
         val m2 = Meditation(R.drawable.m2,"Deep Sleep","Restful nights")
         val m3 = Meditation(R.drawable.m2,"Bedtime Imagery","Surrender to Sleep")
@@ -29,7 +29,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         meditations.value = meditationList
     }
 
-    private fun getStories(){
+    private fun getStories() {
         val s1 = Story(R.drawable.s1, "Falling Leaves","Cum sociis natoque",
             "For delivering the project to us, please create a git repo without using " +
                     "Meditopia name in the project and repository and then please send us the link to repository via email.")

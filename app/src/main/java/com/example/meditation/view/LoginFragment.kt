@@ -9,31 +9,28 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.meditation.R
 import com.example.meditation.databinding.FragmentLoginBinding
 import com.example.meditation.util.Util
 import java.util.regex.Pattern
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding : FragmentLoginBinding
-    private var showPwd = false
-    private lateinit var prefs : Util
+    private lateinit var binding: FragmentLoginBinding
+    private var showPassword = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
-        prefs = Util(requireContext())
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         changePasswordTextForm()
-
         initializeEvents()
-
     }
 
     private fun initializeEvents() {
@@ -44,31 +41,40 @@ class LoginFragment : Fragment() {
             val patern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
             //^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$
 
-            if(userName.length <= 2){
-                Toast.makeText(context,"Username should be long more than two characters!", Toast
-                    .LENGTH_SHORT).show()
-            }
-            else if(patern.matcher(password).matches()){
-                prefs.storeUserName(userName)
-                val action = LoginFragmentDirections.actionLoginToHome()
-                Navigation.findNavController(it).navigate(action)
-            }
-            else{
-                Toast.makeText(context,"Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!", Toast
-                    .LENGTH_SHORT).show()
+            when {
+                userName.length <= 2 -> {
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.shortUserName),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                true -> {
+                    val prefs = Util(requireContext())
+                    prefs.storeUserName(userName)
+                    val action = LoginFragmentDirections.actionLoginToHome()
+                    Navigation.findNavController(it).navigate(action)
+                }
+                else -> {
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.invalidPassword),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
 
     private fun changePasswordTextForm() {
         binding.btnShowPwd.setOnClickListener {
-            if(showPwd){
+            if (showPassword) {
                 binding.passwordIn.transformationMethod = PasswordTransformationMethod.getInstance()
-                showPwd = false
-            }
-            else{
-                binding.passwordIn.transformationMethod =  HideReturnsTransformationMethod.getInstance()
-                showPwd = true
+                showPassword = false
+            } else {
+                binding.passwordIn.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                showPassword = true
             }
         }
     }

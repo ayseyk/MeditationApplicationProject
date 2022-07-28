@@ -1,7 +1,7 @@
 package com.example.meditation.model
 
 class Meditation(
-    val Image : Int,
-    val Name : String?,
-    val Description : String?
+    val image : Int,
+    val name : String?,
+    val description : String?
 )

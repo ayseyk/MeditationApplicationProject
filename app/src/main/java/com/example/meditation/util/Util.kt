@@ -4,13 +4,18 @@ import android.content.Context
 import android.preference.PreferenceManager
 
 class Util(context: Context) {
-    private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-
-    fun storeUserName(userName : String) {
-        prefs.edit().putString("name",userName).apply()
+    companion object {
+        //object üretmeden
+        private const val SHARED_PREF_USERNAME = "name" //!! text
     }
 
-    fun getUserName(): String?{
-        return prefs.getString("name",null)
+    private val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+
+    fun storeUserName(userName: String) {
+        prefs.edit().putString(SHARED_PREF_USERNAME, userName).apply()
+    }
+
+    fun getUserName(): String? {
+        return prefs.getString(SHARED_PREF_USERNAME, null)
     }
 }

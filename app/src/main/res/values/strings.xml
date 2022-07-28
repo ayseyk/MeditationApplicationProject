@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">Meditation</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bannerText">Pretty, isn’t it? Perfectly balanced. As all things should be.</string>
     <string name="mediaTopic">Meditation Detail</string>
+    <string name="bannerText">Look. %1$s Pretty, isn’t it? Perfectly balanced. As all things should be.</string>
+    <string name="meditopia">Sign in to Meditopia</string>
+    <string name="shortUserName">Username should be long more than two characters!</string>
+    <string name="invalidPassword">Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!</string>
+
     <string-array name="days">
         <item>Sun</item>
         <item>Mon</item>
