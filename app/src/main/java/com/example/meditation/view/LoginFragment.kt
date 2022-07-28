@@ -1,64 +1,80 @@
 package com.example.meditation.view
 
 import android.os.Bundle
-import android.text.InputType
-import androidx.fragment.app.Fragment
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavController
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.meditation.R
 import com.example.meditation.databinding.FragmentLoginBinding
+import com.example.meditation.util.Util
 import java.util.regex.Pattern
 
 class LoginFragment : Fragment() {
 
-    private lateinit var binding : FragmentLoginBinding
-    private var showPwd = false
+    private lateinit var binding: FragmentLoginBinding
+    private var showPassword = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater)
         return binding.root
-        //inflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        changePasswordTextForm()
+        initializeEvents()
+    }
 
-        binding.btnShowPwd.setOnClickListener {
-            if(showPwd){
-                binding.passwordIn.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-                showPwd = false
-                Toast.makeText(context, "ilk ifin içindeyim",Toast.LENGTH_SHORT).show()
-            }else{
-                showPwd = true
-                binding.passwordIn.inputType = InputType.TYPE_TEXT_VARIATION_PERSON_NAME
-                Toast.makeText(context, "ikinci ifin içindeyim",Toast.LENGTH_SHORT).show()
-
-            }
-        }
-
+    private fun initializeEvents() {
         binding.btnContinue.setOnClickListener {
             val userName = binding.usernameIn.text.toString()
             val password = binding.passwordIn.text.toString()
-            val passwordShouldBe = ("(?=.*[0-9])(?=.*[A-Z])").toRegex()
-            val patern2 = Pattern.compile("^([0-9]+)([A-Z]+)([a-z]*)$")
-            if(userName.length <= 2){
-                Toast.makeText(context,"Username should be long more than two characters!", Toast
-                    .LENGTH_SHORT).show()
+
+            val patern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
+            //^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$
+
+            when {
+                userName.length <= 2 -> {
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.shortUserName),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                true -> {
+                    val prefs = Util(requireContext())
+                    prefs.storeUserName(userName)
+                    val action = LoginFragmentDirections.actionLoginToHome()
+                    Navigation.findNavController(it).navigate(action)
+                }
+                else -> {
+                    Toast.makeText(
+                        context,
+                        resources.getString(R.string.invalidPassword),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
-            else if(/*password.length > 6 &&*/ patern2.matcher(password).matches()){
-                val action = LoginFragmentDirections.actionLoginToHome()
-                Navigation.findNavController(it).navigate(action)
-            }
-            else{
-               Toast.makeText(context,"Password should consist minimum 6 characters with at least 1 uppercase character, 1 number!", Toast
-                    .LENGTH_SHORT).show()
+        }
+    }
+
+    private fun changePasswordTextForm() {
+        binding.btnShowPwd.setOnClickListener {
+            if (showPassword) {
+                binding.passwordIn.transformationMethod = PasswordTransformationMethod.getInstance()
+                showPassword = false
+            } else {
+                binding.passwordIn.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                showPassword = true
             }
         }
     }

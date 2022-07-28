@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_media_to_home"
             app:destination="@id/homeFragment" />
+        <argument
+            android:name="story"
+            app:argType="com.example.meditation.model.Story" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
