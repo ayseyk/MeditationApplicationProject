@@ -12,7 +12,10 @@ import androidx.navigation.Navigation
 import com.example.meditation.R
 import com.example.meditation.databinding.FragmentLoginBinding
 import com.example.meditation.util.Util
-import java.util.regex.Pattern
+import com.example.meditation.util.Util.Companion.MIN_PASSWORD_LENGTH
+import com.example.meditation.util.Util.Companion.MIN_USERNAME_LENGTH
+import com.example.meditation.util.Util.Companion.REGEX_AT_LEAST_ONE_DIGIT
+import com.example.meditation.util.Util.Companion.REGEX_AT_LEAST_ONE_UPPERCASE
 
 class LoginFragment : Fragment() {
 
@@ -37,20 +40,16 @@ class LoginFragment : Fragment() {
         binding.btnContinue.setOnClickListener {
             val userName = binding.usernameIn.text.toString()
             val password = binding.passwordIn.text.toString()
-
-            val patern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])$")
-            //^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$
-
+            val prefs = Util(requireContext())
             when {
-                userName.length <= 2 -> {
+                userName.length <= MIN_USERNAME_LENGTH -> {
                     Toast.makeText(
                         context,
                         resources.getString(R.string.shortUserName),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                true -> {
-                    val prefs = Util(requireContext())
+                isPasswordValid(password) -> {
                     prefs.storeUserName(userName)
                     val action = LoginFragmentDirections.actionLoginToHome()
                     Navigation.findNavController(it).navigate(action)
@@ -65,6 +64,10 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+    private fun isPasswordValid(password: String) = password.length >= MIN_PASSWORD_LENGTH
+            && password.contains(Regex(REGEX_AT_LEAST_ONE_UPPERCASE))
+            && password.contains(Regex(REGEX_AT_LEAST_ONE_DIGIT))
 
     private fun changePasswordTextForm() {
         binding.btnShowPwd.setOnClickListener {
