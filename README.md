@@ -1,6 +1,6 @@
 # MeditationApplicationProject
 - 3 screens (login, home, detail) <br>
-- Regex (for password)<br>
+- Regex (Password consists minimum 6 characters with at least 1 uppercase character, 1 number)<br>
 - Mock data (Link rot)<br>
 - Media Player<br>
 
